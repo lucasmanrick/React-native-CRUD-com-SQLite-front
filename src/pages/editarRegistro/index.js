@@ -7,64 +7,77 @@ import { DatabaseConnection } from '../../../databases/database';
 const db = new DatabaseConnection.getConnection;
 
  
-export default function RegistrarCliente() {
+export default function EditarRegistro() {
   const navigation = useNavigation();
+  const route = useRoute();
+  
 
   const [novoNome,setNovoNome] = useState('');
   const [novaData,setDataNasc] = useState('');
-  const [numero,setNumero] = useState(0);
+  const [novoNumero,setNumero] = useState(0);
   const [tipo,setTipo] = useState('');
 
-  const [takeClientId,setTakeClientId] = useState(0);
-  const [takeTelId,setTakeTelId] = useState(0);
+  const [idCli,setIdCli] = useState(0);
+  const [idTel,setIdTel] = useState(0);
+
+
+  if(route.params !== undefined) {
+    setNovoNome(route.params?.nome)
+    setDataNasc(route.params?.data_nasc)
+    setNumero(route.params?.numero)
+    setTipo(route.params?.tipo)
+    setIdCli(route.params?.id)
+    setIdTel(route.params?.secondId)
+  }
 
   function alterarRegistro () {
     if(novoNome == '') {
       Alert.alert('o campo nome do cliente esta sem preencher')
+      if(novaData == '') {
+        Alert.alert('o campo nome do cliente esta sem preencher')
+      }
       return
     }
 
     db.transaction(tx => {
-      tx.executeSql('insert into tbl_telefones (numero, tipo) values (?,?)',
-      [numero,tipo],
+      tx.executeSql('Update tbl_telefones SET numero = ? , tipo = ? WHERE id = ?',
+      [novoNumero,tipo,idCli],
       (_,allInfo) => {
-        setTakeTelId(allInfo.insertId)
+
       }
     )
     })
 
     db.transaction(tx => {
-      tx.executeSql('insert into tbl_clientes (nome, data_nasc) values (?,?)',
-      [novoNome,dataNasc],
+      tx.executeSql('UPDATE tbl_clientes SET nome = ?, data_nasc = ? WHERE id = ?',
+      [novoNome,novaData,idTel],
       (_,allInfo) => {
-        setTakeClientId(allInfo.insertId)
       }
     )
     })
   }
    
 
-  useEffect(() => {
-    db.transaction(tx => {
-      tx.executeSql('insert into telefones_has_clientes (telefone_id, cliente_id) values (?,?)',
-      [takeClientId,takeTelId],
-      (_,allInfo) => {
-      }
-    )
-    })
-  },[takeClientId])
-
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={{display:'flex',flexDirection:"column",alignItems:'center', gap:50}}>
-        <TextInput onChangeText={setNovoNome} value={novoNome} placeholder='insira o nome do contato'></TextInput>
-        <TextInput onChangeText={setDataNasc} value={dataNasc} placeholder='insira a data de nascimento'></TextInput>
-        <TextInput onChangeText={setNumero} value={numero} placeholder='insira o numero de telefone'></TextInput>
-        <TextInput onChangeText={setTipo} value={tipo} placeholder='insira o tipo do telefone ex. fixo/cel'></TextInput>
-        <TouchableOpacity onPress={() => {
-          registro()
-        }}><Text>registrar cliente</Text></TouchableOpacity>
+      <View style={{display:'flex',flexDirection:"column",alignItems:'center', gap:20}}>
+
+      <Text>alterar dados de um cliente</Text>
+          <TextInput style={{width:'90%', borderWidth:2, textAlign:'center'}} onChangeText={setIdCli} value={idCli.toString()} placeholder='insira o id do contato'></TextInput>
+        <Text>nome:</Text>
+          <TextInput style={{width:'90%', borderWidth:2, textAlign:'center'}} onChangeText={setNovoNome} value={novoNome} placeholder='insira o nome do contato'></TextInput>
+        <Text>data de nascimento</Text>
+          <TextInput style={{width:'60%', borderWidth:2, textAlign:'center'}} onChangeText={setDataNasc} value={novaData} placeholder='insira a data de nascimento'></TextInput>
+        <Text>numero:</Text>
+          <TextInput style={{width:'60%', borderWidth:2, textAlign:'center'}} onChangeText={setNumero} value={novoNumero.toString()} placeholder='insira o numero de telefone'></TextInput>
+        <Text>tipo:</Text>
+          <TextInput style={{width:'60%', borderWidth:2, textAlign:'center'}} onChangeText={setTipo} value={tipo} placeholder='insira o tipo do telefone ex. fixo/cel'></TextInput>
+        <TouchableOpacity style={{backgroundColor:'dodgerblue', padding:10}} onPress={() => {
+          alterarRegistro()
+          console.log(novoNome,novaData,novoNumero,tipo,idCli)
+          navigation.navigate('Home')
+        }}><Text style={{color:'white'}}>alterar dados do cliente</Text></TouchableOpacity>
       </View>
     </SafeAreaView>
   );

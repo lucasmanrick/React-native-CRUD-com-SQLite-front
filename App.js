@@ -5,6 +5,8 @@ import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/pages/Home';
 import Telefone from './src/pages/telefones';
 import RegistrarCliente from './src/pages/registrarNovoCliente';
+import EditarRegistro from './src/pages/editarRegistro';
+import DeletarClientes from './src/pages/deletaCliente';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +17,8 @@ export default function App() {
         <Stack.Screen name='Home' component={Home} options={{title:'tela inicial', headerTintColor:'white',headerShown:false }}/>
         <Stack.Screen name='telefones' component={Telefone} options={{headerShown:true}}/>
         <Stack.Screen name='registrarCliente' component={RegistrarCliente} options={{headerShown:true}}/>
+        <Stack.Screen name='editarRegistro' component={EditarRegistro} options={{headerShown:true}}/>
+        <Stack.Screen name='deletaCliente' component={DeletarClientes} options={{headerShown:true}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

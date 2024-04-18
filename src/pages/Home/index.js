@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useRoute, useNavigation } from "@react-navigation/native";
+import {useNavigation } from "@react-navigation/native";
 import { DatabaseConnection } from '../../../databases/database';
 
 const db = new DatabaseConnection.getConnection;
@@ -39,6 +39,12 @@ export default function Home() {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {navigation.navigate("registrarCliente")}} style ={{backgroundColor:'blue',width:"50%"}}>
           <Text style={{color:'white',fontSize:20,textAlign:'center'}}>registrar contatos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate("editarRegistro")}} style ={{backgroundColor:'blue',width:"50%"}}>
+          <Text style={{color:'white',fontSize:20,textAlign:'center'}}>editar contato</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate("deletaCliente")}} style ={{backgroundColor:'blue',width:"50%"}}>
+          <Text style={{color:'white',fontSize:20,textAlign:'center'}}>deletar contato</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
