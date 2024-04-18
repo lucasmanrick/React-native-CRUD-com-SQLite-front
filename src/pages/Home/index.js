@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={{display:'flex',flexDirection:"column",alignItems:'center', gap:200}}>
+      <View style={{display:'flex',flexDirection:"column",alignItems:'center', gap:50}}>
         <Text style={{fontSize:20}}>Home</Text>
         <Text style={{fontSize:20}}>Seja bem vindo a sua lista telefonica</Text>
         <TouchableOpacity onPress={() => {navigation.navigate("telefones")}} style ={{backgroundColor:'blue',width:"50%"}}>
