@@ -29,6 +29,19 @@ export default function Home() {
   },[])
 
 
+
+  function teste () {
+    
+    db.transaction(tx => {
+      tx.executeSql('select * from telefones_has_clientes',
+    [],
+  (_,allReturn)=> {
+    console.log(allReturn.rows)})
+    })
+  }
+
+  teste()
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={{display:'flex',flexDirection:"column",alignItems:'center', gap:50}}>
@@ -45,6 +58,9 @@ export default function Home() {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {navigation.navigate("deletaCliente")}} style ={{backgroundColor:'blue',width:"50%"}}>
           <Text style={{color:'white',fontSize:20,textAlign:'center'}}>deletar contato</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate("pesquisarClientes")}} style ={{backgroundColor:'blue',width:"50%"}}>
+          <Text style={{color:'white',fontSize:20,textAlign:'center'}}>pesquisar contato</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

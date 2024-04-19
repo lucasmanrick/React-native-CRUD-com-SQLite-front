@@ -28,10 +28,7 @@ export default function DeletarClientes() {
     }
   )
     })
-  }
 
-
-  function deletaRegistroTblClientes () {
 
     db.transaction(tx => {
       console.log('entrou tbl_cli')
@@ -45,15 +42,6 @@ export default function DeletarClientes() {
       }
     )
     })
-  
-  }
-
-
-
-  function deletaRegistroTblTelefones () {
-
-    console.log(idTel)
-    console.log(idTHS)
 
     db.transaction(tx => {
       console.log('entrou tbl_tel')
@@ -67,10 +55,8 @@ export default function DeletarClientes() {
       }
     )
     })
-  }
 
 
-  function deletaRegistroTblTHS () {
     db.transaction(tx => {
       tx.executeSql('Delete from telefones_has_clientes WHERE id = ?',
       [idTHS],
@@ -82,8 +68,8 @@ export default function DeletarClientes() {
       }
     )
     })
-
   }
+
 
 
 
@@ -95,9 +81,6 @@ export default function DeletarClientes() {
         <TextInput style={{width:'90%',backgroundColor:'white', textAlign:'center'}} onChangeText={setIdCli} value={idCli.toString()} placeholder='insira o id do contato'></TextInput>
       <TouchableOpacity style={{backgroundColor:'dodgerblue', padding:10}} onPress={() => {
         pegaIdsTabelas()
-        deletaRegistroTblTHS()
-        deletaRegistroTblTelefones()
-        deletaRegistroTblClientes()
         navigation.navigate('Home')
       }}><Text style={{color:'white'}}>deletar dados do cliente</Text></TouchableOpacity>
     </View>
@@ -116,4 +99,3 @@ safeArea: {
   marginTop: 30
 }
 });
-

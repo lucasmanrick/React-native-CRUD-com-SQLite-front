@@ -74,8 +74,7 @@ export default function EditarRegistro() {
         <Text>tipo:</Text>
           <TextInput style={{width:'60%', borderWidth:2, textAlign:'center'}} onChangeText={setTipo} value={tipo} placeholder='insira o tipo do telefone ex. fixo/cel'></TextInput>
         <TouchableOpacity style={{backgroundColor:'dodgerblue', padding:10}} onPress={() => {
-          alterarRegistro()
-          console.log(novoNome,novaData,novoNumero,tipo,idCli)
+          alterarRegistro
           navigation.navigate('Home')
         }}><Text style={{color:'white'}}>alterar dados do cliente</Text></TouchableOpacity>
       </View>

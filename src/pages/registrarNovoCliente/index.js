@@ -15,8 +15,8 @@ export default function RegistrarCliente() {
   const [numero,setNumero] = useState('');
   const [tipo,setTipo] = useState('');
 
-  const [takeClientId,setTakeClientId] = useState(0);
-  const [takeTelId,setTakeTelId] = useState(0);
+  let takeClientId = 0
+  let takeTelId = 0
 
   function registro () {
     if(nomeCliente == '') {
@@ -28,7 +28,7 @@ export default function RegistrarCliente() {
       tx.executeSql('insert into tbl_telefones (numero, tipo) values (?,?)',
       [numero,tipo],
       (_,allInfo) => {
-        setTakeTelId(allInfo.insertId)
+        takeTelId = allInfo.insertId
       }
     )
     })
@@ -37,22 +37,25 @@ export default function RegistrarCliente() {
       tx.executeSql('insert into tbl_clientes (nome, data_nasc) values (?,?)',
       [nomeCliente,dataNasc],
       (_,allInfo) => {
-        setTakeClientId(allInfo.insertId)
+        takeClientId = allInfo.insertId
       }
     )
     })
+
+    if(takeClientId !== 0) {
+      db.transaction(tx => {
+        tx.executeSql('insert into telefones_has_clientes (telefone_id, cliente_id) values (?,?)',
+        [takeClientId,takeTelId],
+        (_,allInfo) => {
+        }
+      )
+      })}
   }
    
 
-  useEffect(() => {
-    db.transaction(tx => {
-      tx.executeSql('insert into telefones_has_clientes (telefone_id, cliente_id) values (?,?)',
-      [takeClientId,takeTelId],
-      (_,allInfo) => {
-      }
-    )
-    })
-  },[takeClientId])
+  // useEffect(() => {
+   
+  // },[takeClientId])
 
 
   return (
@@ -62,9 +65,10 @@ export default function RegistrarCliente() {
         <TextInput onChangeText={setDataNasc} value={dataNasc} placeholder='insira a data de nascimento'></TextInput>
         <TextInput onChangeText={setNumero} value={numero} placeholder='insira o numero de telefone'></TextInput>
         <TextInput onChangeText={setTipo} value={tipo} placeholder='insira o tipo do telefone ex. fixo/cel'></TextInput>
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity style={{backgroundColor:'green'}} onPress={() => {
           registro()
-        }}><Text>registrar cliente</Text></TouchableOpacity>
+          navigation.navigate("Home")
+        }}><Text style={{color:'white'}}>registrar cliente</Text></TouchableOpacity>
       </View>
     </SafeAreaView>
   );
