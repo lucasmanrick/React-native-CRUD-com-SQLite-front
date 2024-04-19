@@ -3,13 +3,14 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {useNavigation } from "@react-navigation/native";
 import { DatabaseConnection } from '../../../databases/database';
+import { SvgUri } from 'react-native-svg';
+import Wavesvg from "../../../assets/wave.svg" ;
 
 const db = new DatabaseConnection.getConnection;
 
  
 export default function Home() {
   const navigation = useNavigation();
-
 
   useEffect(() => {
     db.transaction(tx => {
@@ -50,6 +51,11 @@ export default function Home() {
         <TouchableOpacity onPress={() => {navigation.navigate("pesquisarClientes")}} style ={{backgroundColor:'blue',width:"50%", borderRadius:5, padding:10}}>
           <Text style={{color:'white',fontSize:20,textAlign:'center'}}>pesquisar contato</Text>
         </TouchableOpacity>
+
+        <Wavesvg
+          width="200%"
+          height={200}
+        />
       </View>
     </SafeAreaView>
   );

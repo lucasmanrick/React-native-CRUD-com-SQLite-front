@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { DatabaseConnection } from '../../../databases/database';
+import { SvgUri } from 'react-native-svg';
 
 const db = new DatabaseConnection.getConnection;
 
@@ -61,7 +62,7 @@ export default function RegistrarCliente() {
           navigation.navigate("Home")
         }}><Text style={{color:'white',fontWeight:'bold' ,padding:10}}>registrar cliente</Text></TouchableOpacity>
       </View>
-      <SVGAElement xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,256L48,240C96,224,192,192,288,181.3C384,171,480,181,576,154.7C672,128,768,64,864,69.3C960,75,1056,149,1152,197.3C1248,245,1344,267,1392,277.3L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></SVGAElement>
+      
     </SafeAreaView>
   );
 }
