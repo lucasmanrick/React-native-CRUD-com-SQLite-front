@@ -28,38 +28,26 @@ export default function Home() {
     })
   },[])
 
-
-
-  // function teste () {
-    
-  //   db.transaction(tx => {
-  //     tx.executeSql('delete from tbl_telefones',
-  //   [],
-  // (_,allReturn)=> {
-  //   console.log(allReturn.rows)})
-  //   })
-  // }
-
-  // teste()
+  
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={{display:'flex',flexDirection:"column",alignItems:'center', gap:50}}>
+      <View style={{display:'flex',flexDirection:"column",alignItems:'center', gap:40}}>
         <Text style={{fontSize:20}}>Home</Text>
-        <Text style={{fontSize:20}}>Seja bem vindo a sua lista telefonica</Text>
-        <TouchableOpacity onPress={() => {navigation.navigate("telefones")}} style ={{backgroundColor:'blue',width:"50%"}}>
+        <Text style={{fontSize:30,textAlign:'center',fontWeight:'900',color:'purple' }}>Seja bem vindo a sua lista telefonica</Text>
+        <TouchableOpacity onPress={() => {navigation.navigate("telefones")}} style ={{backgroundColor:'blue',width:"50%", borderRadius:5, padding:10}}>
           <Text style={{color:'white',fontSize:20,textAlign:'center'}}>Ver contatos</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate("registrarCliente")}} style ={{backgroundColor:'blue',width:"50%"}}>
+        <TouchableOpacity onPress={() => {navigation.navigate("registrarCliente")}} style ={{backgroundColor:'blue',width:"50%", borderRadius:5, padding:10}}>
           <Text style={{color:'white',fontSize:20,textAlign:'center'}}>registrar contatos</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate("editarRegistro")}} style ={{backgroundColor:'blue',width:"50%"}}>
+        <TouchableOpacity onPress={() => {navigation.navigate("editarRegistro")}} style ={{backgroundColor:'blue',width:"50%", borderRadius:5, padding:10}}>
           <Text style={{color:'white',fontSize:20,textAlign:'center'}}>editar contato</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate("deletaCliente")}} style ={{backgroundColor:'blue',width:"50%"}}>
+        <TouchableOpacity onPress={() => {navigation.navigate("deletaCliente")}} style ={{backgroundColor:'blue',width:"50%", borderRadius:5, padding:10}}>
           <Text style={{color:'white',fontSize:20,textAlign:'center'}}>deletar contato</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate("pesquisarClientes")}} style ={{backgroundColor:'blue',width:"50%"}}>
+        <TouchableOpacity onPress={() => {navigation.navigate("pesquisarClientes")}} style ={{backgroundColor:'blue',width:"50%", borderRadius:5, padding:10}}>
           <Text style={{color:'white',fontSize:20,textAlign:'center'}}>pesquisar contato</Text>
         </TouchableOpacity>
       </View>
