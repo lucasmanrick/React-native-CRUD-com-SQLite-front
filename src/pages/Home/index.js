@@ -30,17 +30,17 @@ export default function Home() {
 
 
 
-  function teste () {
+  // function teste () {
     
-    db.transaction(tx => {
-      tx.executeSql('select * from telefones_has_clientes',
-    [],
-  (_,allReturn)=> {
-    console.log(allReturn.rows)})
-    })
-  }
+  //   db.transaction(tx => {
+  //     tx.executeSql('delete from tbl_telefones',
+  //   [],
+  // (_,allReturn)=> {
+  //   console.log(allReturn.rows)})
+  //   })
+  // }
 
-  teste()
+  // teste()
 
   return (
     <SafeAreaView style={styles.safeArea}>

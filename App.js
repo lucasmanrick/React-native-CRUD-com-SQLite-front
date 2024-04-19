@@ -8,6 +8,7 @@ import RegistrarCliente from './src/pages/registrarNovoCliente';
 import EditarRegistro from './src/pages/editarRegistro';
 import DeletarClientes from './src/pages/deletaCliente';
 import PesquisarClientes from './src/pages/pesquisarClientes';
+import EditaIntegrado from './src/pages/editaIntegrado';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen name='telefones' component={Telefone} options={{headerShown:true}}/>
         <Stack.Screen name='registrarCliente' component={RegistrarCliente} options={{headerShown:true}}/>
         <Stack.Screen name='editarRegistro' component={EditarRegistro} options={{headerShown:true}}/>
+        <Stack.Screen name='editaIntegrado' component={EditaIntegrado} options={{headerShown:true}}/>
         <Stack.Screen name='deletaCliente' component={DeletarClientes} options={{headerShown:true}}/>
         <Stack.Screen name='pesquisarClientes' component={PesquisarClientes} options={{headerShown:true}}/>
       </Stack.Navigator>

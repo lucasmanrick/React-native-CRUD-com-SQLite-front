@@ -18,40 +18,30 @@ export default function RegistrarCliente() {
   let takeClientId = 0
   let takeTelId = 0
 
-  function registro () {
-    if(nomeCliente == '') {
-      Alert.alert('o campo nome do cliente esta sem preencher')
-      return
-    }
-
+  // Função para inserir dados
+  const insertData = () => {
     db.transaction(tx => {
-      tx.executeSql('insert into tbl_telefones (numero, tipo) values (?,?)',
-      [numero,tipo],
-      (_,allInfo) => {
-        takeTelId = allInfo.insertId
-      }
-    )
-    })
-
-    db.transaction(tx => {
-      tx.executeSql('insert into tbl_clientes (nome, data_nasc) values (?,?)',
-      [nomeCliente,dataNasc],
-      (_,allInfo) => {
-        takeClientId = allInfo.insertId
-      }
-    )
-    })
-
-    if(takeClientId !== 0) {
-      db.transaction(tx => {
-        tx.executeSql('insert into telefones_has_clientes (telefone_id, cliente_id) values (?,?)',
-        [takeClientId,takeTelId],
-        (_,allInfo) => {
+      tx.executeSql(
+        'INSERT INTO tbl_clientes (nome,data_nasc) VALUES (?,?);',
+        [nomeCliente,dataNasc],
+        (_, { insertId }) => {
+          const clienteId = insertId;
+          tx.executeSql(
+            'INSERT INTO tbl_telefones (numero,tipo) VALUES (?,?);',
+            [numero,tipo],
+            (_, { insertId }) => {
+              const telefoneId = insertId;
+              tx.executeSql(
+                'INSERT INTO telefones_has_clientes (cliente_id, telefone_id) VALUES (?, ?);',
+                [clienteId, telefoneId]
+              );
+            }
+          );
         }
-      )
-      })}
+      );
+    });
   }
-   
+
 
   // useEffect(() => {
    
@@ -66,7 +56,7 @@ export default function RegistrarCliente() {
         <TextInput onChangeText={setNumero} value={numero} placeholder='insira o numero de telefone'></TextInput>
         <TextInput onChangeText={setTipo} value={tipo} placeholder='insira o tipo do telefone ex. fixo/cel'></TextInput>
         <TouchableOpacity style={{backgroundColor:'green'}} onPress={() => {
-          registro()
+          insertData()
           navigation.navigate("Home")
         }}><Text style={{color:'white'}}>registrar cliente</Text></TouchableOpacity>
       </View>

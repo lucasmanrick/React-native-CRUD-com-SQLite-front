@@ -44,7 +44,7 @@ export default function Telefone() {
             <View key={el.id} style={{ display: 'flex', flexDirection: 'row', width: '90%', height: 150, backgroundColor: 'white', gap: 10, padding: 5, borderRadius: 5, elevation: 10 }}>
 
               <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '65%', gap: 10 }}>
-                <View><Text>nome:{el.id}</Text></View>
+                <View><Text>id:{el.id}</Text></View>
                 <View><Text>nome:{el.nome}</Text></View>
                 <View><Text>data de nascimento:{el.data_nasc}</Text></View>
                 <View><Text>numero:{el.numero} ({el.tipo})</Text></View>
@@ -53,7 +53,7 @@ export default function Telefone() {
               
                 <TouchableOpacity onPress={() => {
                   console.log(el)
-                  navigation.navigate('editarRegistro',{id:el.id,secondId:el.idtel,nome:el.nome,data_nasc:el.data_nasc,numero:el.numero,tipo:el.tipo})
+                  navigation.navigate('editaIntegrado',{id:el.id,secondId:el.idtel,nome:el.nome,data_nasc:el.data_nasc,numero:el.numero,tipo:el.tipo})
                 }} style={{width:'90%', padding:5, borderRadius:5 ,backgroundColor:'dodgerblue'}}><Text style={{color:'white', textAlign:'center'}}>Editar dados</Text></TouchableOpacity>
               </View>
             </View>)
