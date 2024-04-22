@@ -5,8 +5,6 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { controllerCheck } from '../../controller/index';
 
 
-
-
 export default function RegistrarCliente() {
   const navigation = useNavigation();
 
@@ -25,8 +23,9 @@ export default function RegistrarCliente() {
         <TouchableOpacity style={{backgroundColor:'green'}} onPress={() => {
           controllerCheck.registroDeUmNovoCliente(nomeCliente,dataNasc,numero,tipo)
           navigation.navigate("Home")
-        }}><Text style={{color:'white'}}>registrar cliente</Text></TouchableOpacity>
+        }}><Text style={{color:'white',fontWeight:'bold' ,padding:10}}>registrar cliente</Text></TouchableOpacity>
       </View>
+      
     </SafeAreaView>
   );
 }
