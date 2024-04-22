@@ -2,30 +2,19 @@ import React, {useEffect,useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {useNavigation } from "@react-navigation/native";
-import { DatabaseConnection } from '../../../databases/database';
+import { controllerCheck } from '../../controller/index';
 
-const db = new DatabaseConnection.getConnection;
+
 
  
 export default function Home() {
   const navigation = useNavigation();
 
 
+
+
   useEffect(() => {
-    db.transaction(tx => {
-      tx.executeSql('CREATE TABLE IF NOT EXISTS tbl_clientes (id integer PRIMARY KEY AUTOINCREMENT, nome TEXT, data_nasc TEXT)')
-      console.log('criado tbl clientes')
-    })
-
-    db.transaction(tx => {
-      tx.executeSql('CREATE TABLE IF NOT EXISTS tbl_telefones (id integer PRIMARY KEY AUTOINCREMENT, numero INTEGER, tipo TEXT)')
-      console.log('criado tbl telefones')
-    })
-
-    db.transaction(tx => {
-      tx.executeSql('CREATE TABLE IF NOT EXISTS telefones_has_clientes (id integer PRIMARY KEY AUTOINCREMENT, telefone_id INTEGER, cliente_id INTEGER, FOREIGN KEY (telefone_id) REFERENCES tbl_telefones(id), FOREIGN KEY (cliente_id) REFERENCES tbl_clientes(id) )')
-      console.log('criado tbl telefoneshasclientes')
-    })
+    controllerCheck.criaTblCliTelHasCli()
   },[])
 
 

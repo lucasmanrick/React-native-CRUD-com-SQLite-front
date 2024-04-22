@@ -2,11 +2,11 @@ import React, {useEffect,useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { DatabaseConnection } from '../../../databases/database';
+import { controllerCheck } from '../../controller/index';
 
-const db = new DatabaseConnection.getConnection;
 
- 
+
+
 export default function RegistrarCliente() {
   const navigation = useNavigation();
 
@@ -14,39 +14,6 @@ export default function RegistrarCliente() {
   const [dataNasc,setDataNasc] = useState('');
   const [numero,setNumero] = useState('');
   const [tipo,setTipo] = useState('');
-
-  let takeClientId = 0
-  let takeTelId = 0
-
-  // Função para inserir dados
-  const insertData = () => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'INSERT INTO tbl_clientes (nome,data_nasc) VALUES (?,?);',
-        [nomeCliente,dataNasc],
-        (_, { insertId }) => {
-          const clienteId = insertId;
-          tx.executeSql(
-            'INSERT INTO tbl_telefones (numero,tipo) VALUES (?,?);',
-            [numero,tipo],
-            (_, { insertId }) => {
-              const telefoneId = insertId;
-              tx.executeSql(
-                'INSERT INTO telefones_has_clientes (cliente_id, telefone_id) VALUES (?, ?);',
-                [clienteId, telefoneId]
-              );
-            }
-          );
-        }
-      );
-    });
-  }
-
-
-  // useEffect(() => {
-   
-  // },[takeClientId])
-
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -56,7 +23,7 @@ export default function RegistrarCliente() {
         <TextInput onChangeText={setNumero} value={numero} placeholder='insira o numero de telefone'></TextInput>
         <TextInput onChangeText={setTipo} value={tipo} placeholder='insira o tipo do telefone ex. fixo/cel'></TextInput>
         <TouchableOpacity style={{backgroundColor:'green'}} onPress={() => {
-          insertData()
+          controllerCheck.registroDeUmNovoCliente(nomeCliente,dataNasc,numero,tipo)
           navigation.navigate("Home")
         }}><Text style={{color:'white'}}>registrar cliente</Text></TouchableOpacity>
       </View>
