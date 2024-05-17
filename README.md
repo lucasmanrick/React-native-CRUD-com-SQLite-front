@@ -1,0 +1,1 @@
+esse projeto foi realizado com mais de uma tabela no banco de dados feito para atividade de meu curso técnico noturno de desenvolvimento de sistemas do senai justamente para treinar o crud com mais de uma tabela.
